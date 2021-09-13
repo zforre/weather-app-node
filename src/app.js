@@ -5,6 +5,8 @@ const hbs = require("hbs");
 const geocode = require("./utils/geocode");
 const forecast = require("./utils/forecast");
 
+const favicon = require("serve-favicon");
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -20,6 +22,8 @@ hbs.registerPartials(partialsPath);
 
 // Setup static dir to serve
 app.use(express.static(publicDir));
+
+app.use(favicon(path.join(__dirname, "../public/weather.ico")));
 
 app.get("", (req, res) => {
   res.render("index", {
